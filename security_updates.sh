@@ -1,9 +1,54 @@
 #!/usr/bin/env bash
-#
-# Run YUM Update & Upgrade
-#
+##############################################################################
+## Install system package updates
+##############################################################################
+## Files modified
+##
+##############################################################################
+## License
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License along
+## with this program; if not, write to the Free Software Foundation, Inc.,
+## 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+##############################################################################
+## References
+##
+##
+##
+##############################################################################
+## Notes
+##
+##############################################################################
 
+#timestamp
+echo "** security_updates.sh START" $(date +%F-%H%M-%S)
+
+#################
+## SET BASH ERREXIT OPTION
+#################
 set -o errexit
 
-yum update -y
-yum upgrade -y
+#################
+## INSTALL UPDATES
+#################
+/usr/bin/yum update -y
+
+
+#################
+## INSTALL UPGRADES
+#################
+/usr/bin/yum upgrade -y
+
+
+#timestamp
+echo "** security_updates.sh COMPLETE" $(date +%F-%H%M-%S)
