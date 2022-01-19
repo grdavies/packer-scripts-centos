@@ -4,9 +4,7 @@
 ##############################################################################
 ## Files modified
 ##
-## /etc/firewalld/firewalld.conf
-##
-############################################################################
+##############################################################################
 ## License
 ##
 ## This program is free software; you can redistribute it and/or modify
@@ -32,77 +30,19 @@
 ##
 ##############################################################################
 
-# Ensure firewalld is installed
-yum install -y firewalld
-
 #timestamp
-echo "** c7-firewalld START" $(date +%F-%H%M-%S)
-
-##################
-## SET VARIBLES
-##################
-
-BACKUPDIR=/root/KShardening/firewalld
+echo "** security_firewalld_enable.sh START" $(date +%F-%H%M-%S)
 
 #################
-## BACKUP FILES
+## SET BASH ERREXIT OPTION
 #################
-
-if [ ! -d "${BACKUPDIR}" ]; then mkdir -p ${BACKUPDIR}; fi
-
-/bin/cp -fpd /etc/firewalld/firewalld.conf ${BACKUPDIR}/firewalld.conf-DEFAULT
+set -o errexit
 
 ####################
-## WRITE NEW FILES
+## INSTALL FIREWALLD
 ####################
 
-# Here Files
-# http://tldp.org/LDP/abs/html/here-docs.html
-# Note: No parameter substitution when the "limit string" is quoted or escaped.
-
-cat > ${BACKUPDIR}/firewalld.conf << 'EOF'
-# firewalld config file
-
-# default zone
-# The default zone used if an empty zone string is used.
-# Default: public
-DefaultZone=drop
-
-# Minimal mark
-# Marks up to this minimum are free for use for example in the direct
-# interface. If more free marks are needed, increase the minimum
-# Default: 100
-MinimalMark=100
-
-# Clean up on exit
-# If set to no or false the firewall configuration will not get cleaned up
-# on exit or stop of firewalld
-# Default: yes
-CleanupOnExit=yes
-
-# Lockdown
-# If set to enabled, firewall changes with the D-Bus interface will be limited
-# to applications that are listed in the lockdown whitelist.
-# The lockdown whitelist file is lockdown-whitelist.xml
-# Default: no
-Lockdown=no
-
-# IPv6_rpfilter
-# Performs a reverse path filter test on a packet for IPv6. If a reply to the
-# packet would be sent via the same interface that the packet arrived on, the
-# packet will match and be accepted, otherwise dropped.
-# The rp_filter for IPv4 is controlled using sysctl.
-# Default: yes
-IPv6_rpfilter=yes
-EOF
-
-#####################
-## DEPLOY NEW FILES
-#####################
-
-#/bin/cp -f ${BACKUPDIR}/firewalld.conf /etc/firewalld/firewalld.conf
-#/bin/chown root:root /etc/firewalld/firewalld.conf
-#/bin/chmod       640 /etc/firewalld/firewalld.conf
+yum install -y firewalld
 
 ####################
 ## TURN ON SERVICE
@@ -117,4 +57,4 @@ systemctl enable firewalld
 systemctl start firewalld
 
 #timestamp
-echo "** c7-firewalld COMPLETE" $(date +%F-%H%M-%S)
+echo "** security_firewalld_enable.sh COMPLETE" $(date +%F-%H%M-%S)
