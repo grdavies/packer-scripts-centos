@@ -53,7 +53,7 @@ if [ ! -d "${BACKUPDIR}" ]; then mkdir -p ${BACKUPDIR}; fi
 /bin/cp -fpd /etc/selinux/config ${BACKUPDIR}/selinux_config-DEFAULT
 
 #################
-## BACKUP FILES
+## WRITE NEW FILES
 #################
 
 cat > ${BACKUPDIR}/selinux_config << 'EOFSELINUX'
