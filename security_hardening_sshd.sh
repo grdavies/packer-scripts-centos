@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ##############################################################################
-## Enable firewalld
+## Hardening for firewalld
 ##############################################################################
 ## Files modified
 ##
@@ -32,11 +32,12 @@
 ##
 ##############################################################################
 
-# Ensure packages are installed
-yum install -y openssh-server openssh-clients
-
 #timestamp
 echo "** security_hardening_sshd.sh START" $(date +%F-%H%M-%S)
+
+# Ensure packages are installed
+yum install -y openssh-server \
+                openssh-clients
 
 #################
 ## SET BASH ERREXIT OPTION
