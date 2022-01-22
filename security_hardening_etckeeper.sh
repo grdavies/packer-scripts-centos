@@ -38,8 +38,9 @@
 echo "** security_hardening_etckeeper.sh START" $(date +%F-%H%M-%S)
 
 # Ensure packages are installed
-yum install -y epel-release \
-                etckeeper
+yum install -y epel-release
+yum update -y
+yum install -y etckeeper
 
 ##############################
 ## CREATE etckeeper GIT REPO
