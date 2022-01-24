@@ -39,8 +39,8 @@
 echo "** security_hardening_oscap.sh START" $(date +%F-%H%M-%S)
 
 # Ensure packages are installed
-yum install -y @security-tools \
-                openscap \
+yum groups install -y "Security Tools"
+yum install -y openscap \
                 openscap-scanner \
                 openscap-utils \
                 scap-security-guide \
